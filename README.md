@@ -1,5 +1,3 @@
-# SE1610_GroupBCD
 eJounal
 
-Weekly Report: [Google Drive](https://drive.google.com/drive/folders/1w36pI6jBkdSIJ_c_VrQweUZ2fQ1Okffu?usp=sharing)
-
+An online system that facilitates the process of submitting, reviewing and publishing scientific papers
