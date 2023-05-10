@@ -9,6 +9,7 @@ import com.bcd.ejournal.domain.dto.response.AuthorResponse;
 import com.bcd.ejournal.domain.dto.response.EducationResponse;
 import com.bcd.ejournal.domain.dto.response.InvitationPaperResponse;
 import com.bcd.ejournal.domain.dto.response.InvitationReviewerResponse;
+import com.bcd.ejournal.domain.dto.response.InvoiceResponse;
 import com.bcd.ejournal.domain.dto.response.IssueResponse;
 import com.bcd.ejournal.domain.dto.response.JournalResponse;
 import com.bcd.ejournal.domain.dto.response.PaperResponse;
@@ -19,6 +20,7 @@ import com.bcd.ejournal.domain.dto.response.ReviewerResponse;
 import com.bcd.ejournal.domain.entity.Account;
 import com.bcd.ejournal.domain.entity.Author;
 import com.bcd.ejournal.domain.entity.Invitation;
+import com.bcd.ejournal.domain.entity.Invoice;
 import com.bcd.ejournal.domain.entity.Issue;
 import com.bcd.ejournal.domain.entity.Journal;
 import com.bcd.ejournal.domain.entity.Paper;
@@ -46,6 +48,9 @@ public class DTOMapper {
         PaperResponse paperResponse = modelMapper.map(paper, PaperResponse.class);
         paperResponse.setJournal(toJournalResponse(paper.getJournal()));
         paperResponse.setAuthors(toAuthorResponse(paper.getAuthor()));
+	  if (paper.getLinkPDF() != null) {
+	      paperResponse.setLinkPDF(paper.getLinkPDF().trim());
+ 	  }
         return paperResponse;
     }
 
@@ -74,6 +79,9 @@ public class DTOMapper {
         IssueResponse issueResponse = modelMapper.map(issue, IssueResponse.class);
         issueResponse.setJournal(toJournalResponse(issue.getJournal()));
         issueResponse.setNumberOfPaper(issue.getPublishes().size());
+	  if (issue.getLinkPDF() != null) {
+            issueResponse.setLinkPDF(issue.getLinkPDF().trim());
+	  }
         return issueResponse;
     }
 
@@ -124,5 +132,10 @@ public class DTOMapper {
         PaperResponse paperResponse = toPaperResponse(invitation.getPaper());
         response.setPaper(paperResponse);
         return response;
+    }
+    
+    public InvoiceResponse toInvoiceResponse(Invoice invoice) {
+    	InvoiceResponse invoiceResponse = modelMapper.map(invoice, InvoiceResponse.class);
+    	return invoiceResponse;
     }
 }
